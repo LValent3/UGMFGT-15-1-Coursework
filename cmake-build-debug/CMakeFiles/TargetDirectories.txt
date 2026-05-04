@@ -1,0 +1,3 @@
+C:/Users/loren/Documents/Clion Projects/UGMFGT-15-1-Coursework/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/loren/Documents/Clion Projects/UGMFGT-15-1-Coursework/cmake-build-debug/CMakeFiles/UGMFGT_15_1_Coursework.dir
+C:/Users/loren/Documents/Clion Projects/UGMFGT-15-1-Coursework/cmake-build-debug/CMakeFiles/edit_cache.dir
