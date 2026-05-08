@@ -6,30 +6,32 @@
 #include "io.h"
 
 WaveformSample* read_csv_data(const char* filename, int* total_samples) {
-    // i'm opening the file here to read it
     FILE* file = fopen(filename, "r");
-
-    // this is to check if the file actually exists, otherwise the program will crash
     if (file == NULL) {
         printf("Error: Could not open %s\n", filename);
         return NULL;
     }
 
-    // this is to figure out how many lines are in the file
     int line_count = 0;
-    char buffer[1024]; // a temporary space to hold each line as i scan past it
+    char buffer[1024];
 
-    // looping through the file line by line until there are no lines left
     while (fgets(buffer, sizeof(buffer), file) != NULL) {
         line_count++;
     }
 
-    // subtracting 1 because the top row is just text headers, not actual numbers
     *total_samples = line_count - 1;
-
     rewind(file);
 
-    // closing it just for now, i will add the memory stuff next
+    // using malloc to ask for enough memory to hold all the struct rows
+    WaveformSample* data = (WaveformSample*)malloc(*total_samples * sizeof(WaveformSample));
+
+    // checking if the computer actually gave me the memory before moving on
+    if (data == NULL) {
+        printf("Error: Memory allocation failed\n");
+        fclose(file);
+        return NULL;
+    }
+
     fclose(file);
-    return NULL;
+    return data;
 }
