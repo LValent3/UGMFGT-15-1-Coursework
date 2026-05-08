@@ -17,4 +17,6 @@ typedef struct {
     double thd_percent;     // Total Harmonic Distortion percentage
 } WaveformSample;
 
+void analyze_waveform(WaveformSample* data, int total_samples);
+
 #endif //UGMFGT_15_1_COURSEWORK_WAVEFORM_H
