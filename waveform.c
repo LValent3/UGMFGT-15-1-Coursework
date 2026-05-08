@@ -60,4 +60,17 @@ void analyze_waveform(WaveformSample* data, int total_samples) {
 
     printf("--- Phase C ---\nRMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d\n", rms_C, ptp_C, dc_offset_C, clipped_C);
     if (rms_C >= 207.0 && rms_C <= 253.0) printf("Status: Compliant\n"); else printf("Status: OUT OF TOLERANCE\n");
+
+    // writing all these answers to a text file to meet requirement 10
+    FILE* report = fopen("results.txt", "w");
+    if (report != NULL) {
+        fprintf(report, "--- Power Quality Report ---\n");
+        fprintf(report, "Phase A -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d\n", rms_A, ptp_A, dc_offset_A, clipped_A);
+        fprintf(report, "Phase B -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d\n", rms_B, ptp_B, dc_offset_B, clipped_B);
+        fprintf(report, "Phase C -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d\n", rms_C, ptp_C, dc_offset_C, clipped_C);
+        fclose(report);
+        printf("\nSuccess: Saved full report to results.txt\n");
+    } else {
+        printf("\nError: Could not create results.txt\n");
+    }
 }
