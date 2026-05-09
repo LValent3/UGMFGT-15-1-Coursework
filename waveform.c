@@ -72,19 +72,21 @@ void analyze_waveform(WaveformSample* data, int total_samples) {
     double variance_C = var_sum_C / total_samples;
     double std_dev_C = sqrt(variance_C);
 
-    // writing all these answers to a text file
-    FILE *report = fopen("results.txt", "w");
+    // printing all the answers to the terminal
+    printf("\n--- Phase A ---\nRMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_A, ptp_A, dc_offset_A, clipped_A, std_dev_A);
+    printf("--- Phase B ---\nRMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_B, ptp_B, dc_offset_B, clipped_B, std_dev_B);
+    printf("--- Phase C ---\nRMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n\n", rms_C, ptp_C, dc_offset_C, clipped_C, std_dev_C);
+
+    // writing those exact same answers to the text file
+    FILE* report = fopen("results.txt", "w");
     if (report != NULL) {
         fprintf(report, "--- Power Quality Report ---\n");
-        fprintf(report, "Phase A -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_A,
-                ptp_A, dc_offset_A, clipped_A, std_dev_A);
-        fprintf(report, "Phase B -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_B,
-                ptp_B, dc_offset_B, clipped_B, std_dev_B);
-        fprintf(report, "Phase C -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_C,
-                ptp_C, dc_offset_C, clipped_C, std_dev_C);
+        fprintf(report, "Phase A -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_A, ptp_A, dc_offset_A, clipped_A, std_dev_A);
+        fprintf(report, "Phase B -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_B, ptp_B, dc_offset_B, clipped_B, std_dev_B);
+        fprintf(report, "Phase C -> RMS: %.2f V | Pk-Pk: %.2f V | DC: %.2f V | Clipped: %d | StdDev: %.2f\n", rms_C, ptp_C, dc_offset_C, clipped_C, std_dev_C);
         fclose(report);
-        printf("Success: Saved report to results.txt\n");
+        printf("Success: Saved Distinction-level report to results.txt\n");
     } else {
-        printf("\nError: Could not create results.txt\n");
+        printf("Error: Could not create results.txt\n");
     }
 }
